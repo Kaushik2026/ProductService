@@ -1,6 +1,8 @@
 package com.backendlld.productservice.controllers;
 
 import com.backendlld.productservice.models.Product;
+import com.backendlld.productservice.services.ProductService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -8,15 +10,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products")
+@AllArgsConstructor
 public class ProductController {
+    private ProductService productService;
     @GetMapping("/{id}")
     public Product getSingleProduct(@PathVariable("id") Long productId) {
-        return new Product();
+        return productService.getSingleProduct(productId);
     }
 
     @GetMapping
     public List<Product> getAllProducts() {
-        return new ArrayList<Product>();
+        return productService.getAllProducts();
     }
 
     @PostMapping
@@ -29,8 +33,8 @@ public class ProductController {
 
     }
 
-    @PatchMapping("/id")//for partial update
-    public void UpdateProduct(@PathVariable("id") Product product, @RequestBody Long productId) {
+    @PatchMapping("/{id}")//for partial update
+    public void UpdateProduct(@PathVariable("id")  Long productId, @RequestBody Product product) {
 
     }
 
