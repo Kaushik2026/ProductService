@@ -1,8 +1,11 @@
 package com.backendlld.productservice.controllers;
 
+import com.backendlld.productservice.exception.ProductNotFoundException;
 import com.backendlld.productservice.models.Product;
 import com.backendlld.productservice.services.ProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -14,8 +17,10 @@ import java.util.List;
 public class ProductController {
     private ProductService productService;
     @GetMapping("/{id}")
-    public Product getSingleProduct(@PathVariable("id") Long productId) {
-        return productService.getSingleProduct(productId);
+    public ResponseEntity<Product> getSingleProduct(@PathVariable("id") Long productId) throws ProductNotFoundException {
+        return new ResponseEntity<>(
+                productService.getSingleProduct(productId), HttpStatus.OK
+        );
     }
 
     @GetMapping

@@ -1,6 +1,7 @@
 package com.backendlld.productservice.services;
 
 import com.backendlld.productservice.dtos.FakeStoreProductDto;
+import com.backendlld.productservice.exception.ProductNotFoundException;
 import com.backendlld.productservice.models.Category;
 import com.backendlld.productservice.models.Product;
 import lombok.AllArgsConstructor;
@@ -15,10 +16,11 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     private RestTemplate restTemplate;
     @Override
-    public Product getSingleProduct(Long productId) {
-        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/" + productId, FakeStoreProductDto.class);
+    public Product getSingleProduct(Long productId) throws ProductNotFoundException {
+        throw new ProductNotFoundException();
 
-        return convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
+//        FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/" + productId, FakeStoreProductDto.class);
+//        return convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
 
     }
 

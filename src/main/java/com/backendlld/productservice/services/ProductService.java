@@ -1,5 +1,6 @@
 package com.backendlld.productservice.services;
 
+import com.backendlld.productservice.exception.ProductNotFoundException;
 import com.backendlld.productservice.models.Product;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ProductService {
-    Product getSingleProduct(Long productId);
+    Product getSingleProduct(Long productId) throws ProductNotFoundException;
 
     List<Product> getAllProducts();
 
